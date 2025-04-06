@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quicket - Login</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-wrapper {
+            background-color: #e5e7eb;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        .brand-title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #374151;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #fff;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            outline: none;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .form-options {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .form-options a {
+            text-decoration: none;
+            color: #4f46e5;
+            font-weight: 500;
+        }
+
+        .bottom-text {
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .bottom-text a {
+            color: #4f46e5;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .success-msg {
+            color: green;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form class="login-wrapper" method="POST" action="/login">
+        <div class="brand-title">Quicket</div>
+        <div class="tagline">Your fast pass to bookings.</div>
+
+        <h2>Booking System Login</h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="success-msg">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+
+        {% if error %}
+            <div class="error-msg">{{ error }}</div>
+        {% endif %}
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" placeholder="Enter your username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit">Sign In</button>
+
+        <div class="form-options">
+            <label><input type="checkbox" name="remember"> Remember Me</label>
+            <a href="#">Forgot Password?</a>
+        </div>
+
+        <div class="bottom-text">
+            Not a Member? <a href="{{ url_for('auth.register') }}">Create Account</a>
+        </div>        
+    </form>
+</body>
+</html>
